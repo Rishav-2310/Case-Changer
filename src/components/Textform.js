@@ -15,16 +15,30 @@ export default function Textform(props){
         let lowText= text.toLowerCase();
         setText(lowText)
     }
-    const [text, setText]= useState("Enter text here...");
+    const handleClearClick= ()=>{
+        let clearText= '';
+        setText(clearText)
+    }
+    const [text, setText]= useState('');
     return(
+        <>
         <div>
             <h1>{props.heading}</h1>
             <div className="mb-3">
-                <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+                <textarea className="form-control" value={text} onChange={handleOnChange} id="myBox" rows="8" placeholder='Enter text here...'></textarea>
             </div>
-            <button className="btn btn-primary" onClick={handleUpClick}>Convert to Uppercase</button>
-            <button className="btn btn-primary" onClick={handleDownClick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleUpClick}>Convert to Uppercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleDownClick}>Convert to Lowercase</button>
+            <button className="btn btn-primary mx-2" onClick={handleClearClick}>Clear Text</button>
         </div>
+        <div className="container my-3">
+            <h2>Your text summary</h2>
+            <p>{text.split(" ").length} words and {text.length} characters</p>
+            <p>{0.008 * text.split(" ").length} Mintues to read</p>
+            <h3>Preview</h3>
+            <p>{text}</p>
+        </div>
+        </>
     )
 }
 
